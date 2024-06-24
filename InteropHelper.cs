@@ -67,6 +67,11 @@ namespace Andromeda.Runtime
 
         #region Endianness
 
+        public static Endianness SystemEndianness
+            => BitConverter.IsLittleEndian
+                ? Endianness.LittleEndian
+                : Endianness.BigEndian;
+
         /// <summary>
         /// Checks if endianness should be changed
         /// </summary>
@@ -80,11 +85,7 @@ namespace Andromeda.Runtime
         public static bool ShouldReverseEndianness(
             Endianness endianness = Endianness.NotSpecified
         ) => endianness != Endianness.NotSpecified
-            && endianness != (
-                BitConverter.IsLittleEndian
-                ? Endianness.LittleEndian
-                : Endianness.BigEndian
-            );
+            && endianness != SystemEndianness;
 
         #endregion
 
